@@ -1,0 +1,166 @@
+﻿<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>คิดถึงพี่มั้ย</title>
+  <style>
+    :root {
+      --bg1: #ffe3ec;
+      --bg2: #ffd1dc;
+      --card: #fff7fa;
+      --text: #5a2a3a;
+      --yes: #ff4d88;
+      --yes-hover: #ff2f74;
+      --no: #fff;
+      --no-border: #e8a0b8;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: "Tahoma", "Noto Sans Thai", sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, var(--bg1), var(--bg2));
+      color: var(--text);
+      padding: 16px;
+    }
+
+    .card {
+      width: min(560px, 100%);
+      background: var(--card);
+      border-radius: 24px;
+      padding: 28px 22px;
+      text-align: center;
+      box-shadow: 0 12px 35px rgba(90, 42, 58, 0.2);
+    }
+
+    h1 {
+      font-size: clamp(1.5rem, 4vw, 2.2rem);
+      margin-bottom: 10px;
+    }
+
+    p {
+      font-size: 1rem;
+      opacity: 0.85;
+      margin-bottom: 24px;
+      min-height: 1.6em;
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    button {
+      border: none;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      padding: 12px 22px;
+      font-weight: bold;
+    }
+
+    #yesBtn {
+      background: var(--yes);
+      color: #fff;
+      font-size: 1.05rem;
+      box-shadow: 0 6px 16px rgba(255, 77, 136, 0.35);
+      white-space: nowrap;
+    }
+
+    #yesBtn:hover {
+      background: var(--yes-hover);
+      transform: translateY(-1px);
+    }
+
+    #noBtn {
+      background: var(--no);
+      color: var(--text);
+      border: 1px solid var(--no-border);
+      font-size: 1rem;
+    }
+
+    #result {
+      margin-top: 22px;
+      font-size: clamp(1.2rem, 3.5vw, 1.8rem);
+      font-weight: 700;
+      color: #d81b60;
+      min-height: 1.8em;
+    }
+  </style>
+</head>
+<body>
+  <main class="card">
+    <h1 id="question">คิดถึงพี่มั้ย</h1>
+    <p id="subtext">ตอบตามใจได้เลยนะ</p>
+
+    <div class="buttons" id="buttonWrap">
+      <button id="yesBtn" type="button">คิดถึง</button>
+      <button id="noBtn" type="button">ไม่คิดถึง</button>
+    </div>
+
+    <div id="result"></div>
+  </main>
+
+  <script>
+    const question = document.getElementById("question");
+    const subtext = document.getElementById("subtext");
+    const yesBtn = document.getElementById("yesBtn");
+    const noBtn = document.getElementById("noBtn");
+    const result = document.getElementById("result");
+
+    const teasingQuestions = [
+      "ไม่คิดถึงจริงหรอ",
+      "แน่ใจนะว่าไม่คิดถึงพี่",
+      "คิดถึงพี่นิดนึงก็ได้มั้ง",
+      "คนดี อย่าดื้อสิ คิดถึงพี่เถอะ",
+      "งื้อออ กดคิดถึงให้พี่หน่อยนะ",
+      "โอเค ยอมแล้ว กดคิดถึงเถอะน้าาา"
+    ];
+
+    const teasingSubtext = [
+      "พี่เหงานะ",
+      "ตอบใหม่ได้ตลอดเลยนะ",
+      "พี่รอคำว่าคิดถึงอยู่",
+      "หัวใจพี่บางมากตอนนี้",
+      "อีกนิดเดียวเองคนเก่ง",
+      "พี่แพ้แล้ววว"
+    ];
+
+    let noCount = 0;
+    let yesFont = 1.05;
+    let yesPadY = 12;
+    let yesPadX = 22;
+
+    noBtn.addEventListener("click", () => {
+      const idx = Math.min(noCount, teasingQuestions.length - 1);
+      question.textContent = teasingQuestions[idx];
+      subtext.textContent = teasingSubtext[idx];
+
+      yesFont = Math.min(yesFont * 1.75, 24);
+      yesPadY = Math.min(yesPadY * 1.45, 260);
+      yesPadX = Math.min(yesPadX * 1.6, 420);
+      yesBtn.style.fontSize = `${yesFont}rem`;
+      yesBtn.style.padding = `${yesPadY}px ${yesPadX}px`;
+      yesBtn.style.position = "relative";
+      yesBtn.style.zIndex = "5";
+
+      noCount += 1;
+    });
+
+    yesBtn.addEventListener("click", () => {
+      window.location.href = "love.html";
+    });
+  </script>
+</body>
+</html>
